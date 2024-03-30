@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body align="center">
+<div ng-app="calculatorApp" ng-controller="CalculatorController">
+    <h2>Calculator</h2>
+    <label for="number1">Number 1:</label>
+ <input type="number" id="number1" ng-model="number1">
+    <label for="number2">Number 2:</label>
+<input type="number" id="number2" ng-model="number2"> 
+  <label for="operation">Operation:</label>
+    <select id="operation" ng-model="selectedOperation">
+      <option value="addition">Addition (+)</option>
+       <option value="subtraction">Subtraction (-)</option>
+       <option value="multiplication">Multiplication (*)</option>
+       <option value="division">Division (/)</option>
+    </select><br>
+    <button ng-click="performOperation()">Calculate</button><br>
+    <p ng-if="result !== undefined">Result: {{ result }}</p></div>
+<script>
+    var app = angular.module('calculatorApp', []);
+    app.controller('CalculatorController', function($scope) {
+        $scope.number1 = 0;
+        $scope.number2 = 0;
+        $scope.selectedOperation = 'addition';
+        $scope.result = undefined;
+        $scope.performOperation = function() {
+            switch ($scope.selectedOperation) {
+                case 'addition':
+                    $scope.result = $scope.number1 + $scope.number2;
+                    break;
+                case 'subtraction':
+                    $scope.result = $scope.number1 - $scope.number2;
+                    break;
+                case 'multiplication':
+                    $scope.result = $scope.number1 * $scope.number2;
+                    break;
+                case 'division':
+                    $scope.result = $scope.number2 !== 0 ? $scope.number1 / $scope.number2 : 'Error: Division by zero';
+                    break;
+                default:
+                    $scope.result = undefined;
+            }
+        };
+    });
+</script>
+</body>
+</html>

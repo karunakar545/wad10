@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head><body align="center">
+<div ng-app="emailValidationApp" ng-controller="EmailValidationController">
+    <h2>Email validation</h2>
+    <form name="emailForm" ng-submit="submitForm()">
+      <label for="email">Email:</label>
+        <input type="email" id="email" name="email" ng-model="email" ng-pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/">
+<div ng-show="emailForm.email.$error.pattern && emailForm.email.$dirty">
+            <span style="color: red;">Invalid email address</span>
+     </div><br>
+        <button type="submit">Submit</button>
+    </form></div>
+<script>
+    var app = angular.module('emailValidationApp', []);
+    app.controller('EmailValidationController', function($scope) {
+        $scope.submitForm = function() {
+            if ($scope.emailForm.$valid) {
+                alert('Form submitted successfully!');
+                $scope.email = '';
+                $scope.emailForm.$setPristine();
+            } else {
+                alert('Please correct the errors in the form.');}
+        };});
+</script></body>
+</html>

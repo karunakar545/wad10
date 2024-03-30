@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head><body>
+<div ng-app="productApp" ng-controller="ProductController">
+    <h2>Product List</h2>
+    <label for="search">Search by Name:</label>
+    <input type="text" id="search" ng-model="searchText">
+    <ul>
+        <li ng-repeat="product in products | filter:searchText">
+            {{ product.name }} - ${{ product.price }}
+        </li></ul>
+</div>
+<script>
+    var app = angular.module('productApp', []);
+    app.controller('ProductController', function($scope) {
+        // List of products
+        $scope.products = [
+            { name: 'Product A', price: 10 },
+            { name: 'Product B', price: 20 },
+            { name: 'Product C', price: 30 },
+            { name: 'Product D', price: 40 },
+            { name: 'Product E', price: 50 }
+        ];
+    });
+</script>
+</body>
+</html>
